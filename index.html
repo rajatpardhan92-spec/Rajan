@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+
+    <style>
+        /* ===== Global Styling ===== */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background: #0f172a;
+            color: white;
+            scroll-behavior: smooth;
+        }
+        
+        section {
+            padding: 80px 10%;
+        }
+        
+        h1,
+        h2 {
+            margin-bottom: 20px;
+        }
+        /* ===== Navbar ===== */
+        
+        nav {
+            position: fixed;
+            width: 100%;
+            background: #1e293b;
+            padding: 15px 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        
+        nav a:hover {
+            color: #38bdf8;
+        }
+        /* ===== Hero ===== */
+        
+        #home {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero-text {
+            max-width: 600px;
+        }
+        
+        .hero-text h1 {
+            font-size: 3rem;
+            color: #38bdf8;
+        }
+        /* ===== Cards ===== */
+        
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .card {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        /* ===== Weather App ===== */
+        
+        .weather-box input {
+            padding: 8px;
+            width: 70%;
+        }
+        
+        .weather-box button {
+            padding: 8px;
+            background: #38bdf8;
+            border: none;
+            cursor: pointer;
+        }
+        /* ===== Tic Tac Toe ===== */
+        
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(3, 80px);
+            gap: 5px;
+            margin-top: 10px;
+        }
+        
+        .cell {
+            width: 80px;
+            height: 80px;
+            background: #334155;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        /* ===== Footer ===== */
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #1e293b;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== Navbar ===== -->
+    <nav>
+        <h2>MyPortfolio</h2>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Mini Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- ===== Hero Section ===== -->
+    <section id="home">
+        <div class="hero-text">
+            <h1>Hello, I'm a Web Developer</h1>
+            <p>I create interactive and responsive web applications.</p>
+        </div>
+    </section>
+
+    <!-- ===== About Section ===== -->
+    <section id="about">
+        <h2>About Me</h2>
+        <p>
+            I am a passionate front-end developer skilled in HTML, CSS, and JavaScript. I enjoy building interactive mini projects and learning new technologies.
+        </p>
+    </section>
+
+    <!-- ===== Mini Projects ===== -->
+    <section id="projects">
+        <h2>Mini Projects</h2>
+        <div class="cards">
+
+            <!-- Astro Master -->
+            <div class="card">
+                <h3>Astro Master</h3>
+                <p>A simple space facts generator.</p>
+                <button onclick="astroFact()">Get Space Fact</button>
+                <p id="astroOutput"></p>
+            </div>
+
+            <!-- Weather App -->
+            <div class="card weather-box">
+                <h3>Weather App</h3>
+                <input type="text" id="cityInput" placeholder="Enter city">
+                <button onclick="getWeather()">Search</button>
+                <p id="weatherResult"></p>
+            </div>
+
+            <!-- Tic Tac Toe -->
+            <div class="card">
+                <h3>Tic Tac Toe</h3>
+                <div class="game-board" id="board"></div>
+                <p id="gameStatus"></p>
+            </div>
+
+            <!-- Counter App -->
+            <div class="card">
+                <h3>Counter App</h3>
+                <p id="count">0</p>
+                <button onclick="increment()">+</button>
+                <button onclick="decrement()">-</button>
+            </div>
+
+            <!-- Random Color Generator -->
+            <div class="card">
+                <h3>Color Generator</h3>
+                <button onclick="changeColor()">Change Background</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== Contact Section ===== -->
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <p>Email: your@email.com</p>
+    </section>
+
+    <footer>
+        <p>© 2026 My Portfolio | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        /* ===== Astro Master ===== */
+        function astroFact() {
+            const facts = [
+                "The Sun accounts for 99.86% of the solar system’s mass.",
+                "Neutron stars can spin 600 times per second.",
+                "Venus is hotter than Mercury.",
+                "One day on Venus is longer than one year on Earth."
+            ];
+            document.getElementById("astroOutput").innerText =
+                facts[Math.floor(Math.random() * facts.length)];
+        }
+
+        /* ===== Weather App ===== */
+        async function getWeather() {
+            const city = document.getElementById("cityInput").value;
+            const apiKey = "YOUR_API_KEY_HERE"; // Insert OpenWeatherMap API key
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                if (data.cod === 200) {
+                    document.getElementById("weatherResult").innerText =
+                        `Temp: ${data.main.temp}°C | ${data.weather[0].description}`;
+                } else {
+                    document.getElementById("weatherResult").innerText = "City not found";
+                }
+            } catch (error) {
+                document.getElementById("weatherResult").innerText = "Error fetching data";
+            }
+        }
+
+        /* ===== Tic Tac Toe ===== */
+        const board = document.getElementById("board");
+        const statusText = document.getElementById("gameStatus");
+        let currentPlayer = "X";
+        let cells = [];
+
+        function createBoard() {
+            board.innerHTML = "";
+            cells = [];
+            for (let i = 0; i < 9; i++) {
+                const cell = document.createElement("div");
+                cell.classList.add("cell");
+                cell.addEventListener("click", () => makeMove(i));
+                board.appendChild(cell);
+                cells.push("");
+            }
+        }
+        createBoard();
+
+        function makeMove(index) {
+            const cellDiv = board.children[index];
+            if (cells[index] === "") {
+                cells[index] = currentPlayer;
+                cellDiv.innerText = currentPlayer;
+                if (checkWin()) {
+                    statusText.innerText = currentPlayer + " Wins!";
+                    setTimeout(resetGame, 1500);
+                }
+                currentPlayer = currentPlayer === "X" ? "O" : "X";
+            }
+        }
+
+        function checkWin() {
+            const wins = [
+                [0, 1, 2],
+                [3, 4, 5],
+                [6, 7, 8],
+                [0, 3, 6],
+                [1, 4, 7],
+                [2, 5, 8],
+                [0, 4, 8],
+                [2, 4, 6]
+            ];
+            return wins.some(comb =>
+                comb.every(i => cells[i] === currentPlayer)
+            );
+        }
+
+        function resetGame() {
+            currentPlayer = "X";
+            statusText.innerText = "";
+            createBoard();
+        }
+
+        /* ===== Counter ===== */
+        let count = 0;
+
+        function increment() {
+            count++;
+            document.getElementById("count").innerText = count;
+        }
+
+        function decrement() {
+            count--;
+            document.getElementById("count").innerText = count;
+        }
+
+        /* ===== Color Generator ===== */
+        function changeColor() {
+            document.body.style.background =
+                "#" + Math.floor(Math.random() * 16777215).toString(16);
+        }
+    </script>
+
+</body>
+
+</html>
